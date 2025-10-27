@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}All Movies{% endblock %}
+{% block content %}
+    <h2>Current Movies</h2>
+    {% for movie in movies %}
+    <div class="movie-card">
+        <h3><a href="{{ url_for('movie_detail', movie_id=movie.MOVIE_ID) }}">{{ movie.TITLE }} ({{ movie.RELEASE_YEAR }})</a></h3>
+        <p><strong>Genre:</strong> {{ movie.GENRE }}</p>
+        <p><strong>Avg Rating:</strong> {{ movie.AVG_RATING|float|round(1) if movie.AVG_RATING else 'N/A' }} / 10</p>
+    </div>
+    {% endfor %}
+{% endblock %}

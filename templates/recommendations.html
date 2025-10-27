@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Your Recommendations{% endblock %}
+{% block content %}
+    <h2>Your Top 10 Recommendations 💡</h2>
+    <p>Recommendations are based on your highest rated genres and movies you have not yet reviewed (Logic implemented in Oracle PL/SQL).</p>
+    
+    {% if movies %}
+        {% for movie in movies %}
+        <div class="movie-card">
+            <h3><a href="{{ url_for('movie_detail', movie_id=movie.MOVIE_ID) }}">{{ movie.TITLE }}</a></h3>
+            <p><strong>Genre:</strong> {{ movie.GENRE }}</p>
+            <p><strong>Community Avg Rating:</strong> {{ movie.AVG_RATING|float|round(1) }} / 10</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No recommendations found! Please review more movies or ensure you have set your preferences.</p>
+    {% endif %}
+{% endblock %}
